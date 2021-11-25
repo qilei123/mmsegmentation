@@ -56,7 +56,7 @@ class TDDataset(CustomDataset):
             info = self.coco.loadImgs([i])[0]
             info['filename'] = osp.join(img_dir, info['file_name'])
             
-            ann_ids = self.coco.getAnnIds(img_ids=[i])
+            ann_ids = self.coco.getAnnIds(imgIds=[i])
             
             if len(ann_ids)==0:
                 continue
