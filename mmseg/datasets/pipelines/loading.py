@@ -123,7 +123,7 @@ class LoadAnnotations(object):
 
         if self.file_client is None:
             self.file_client = mmcv.FileClient(**self.file_client_args)
-
+        print(results)
         if results.get('seg_prefix', None) is not None:
             filename = osp.join(results['seg_prefix'],
                                 results['ann_info']['seg_map'])
