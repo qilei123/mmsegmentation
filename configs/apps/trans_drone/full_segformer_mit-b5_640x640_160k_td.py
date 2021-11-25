@@ -31,7 +31,7 @@ model = dict(
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
 dataset_type = 'TDDataset'
-data_root = 'data/ade/ADEChallengeData2016'
+data_root = 'data/td'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 crop_size = (640, 640)
@@ -73,10 +73,10 @@ data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
     train=dict(
-        type='ADE20KDataset',
-        data_root='data/ade/ADEChallengeData2016',
-        img_dir='images/training',
-        ann_dir='annotations/training',
+        type=dataset_type,
+        data_root=data_root,
+        img_dir='images',
+        ann_dir='annotations/train_AW.json',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', reduce_zero_label=True),
@@ -94,10 +94,10 @@ data = dict(
             dict(type='Collect', keys=['img', 'gt_semantic_seg'])
         ]),
     val=dict(
-        type='ADE20KDataset',
-        data_root='data/ade/ADEChallengeData2016',
-        img_dir='images/validation',
-        ann_dir='annotations/validation',
+        type=dataset_type,
+        data_root=data_root,
+        img_dir='images',
+        ann_dir='annotations/test_AW.json',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -117,10 +117,10 @@ data = dict(
                 ])
         ]),
     test=dict(
-        type='ADE20KDataset',
-        data_root='data/ade/ADEChallengeData2016',
-        img_dir='images/validation',
-        ann_dir='annotations/validation',
+        type=dataset_type,
+        data_root=data_root,
+        img_dir='images',
+        ann_dir='annotations/test_AW.json',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
