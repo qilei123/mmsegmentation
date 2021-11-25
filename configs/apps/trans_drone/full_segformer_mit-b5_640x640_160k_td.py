@@ -169,3 +169,4 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=160000)
 checkpoint_config = dict(by_epoch=False, interval=16000)
 evaluation = dict(interval=16000, metric='mIoU', pre_eval=True)
+work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td/'
