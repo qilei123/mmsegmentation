@@ -123,7 +123,13 @@ class LoadAnnotations(object):
 
         if self.file_client is None:
             self.file_client = mmcv.FileClient(**self.file_client_args)
+        '''
         print(results)
+        if isinstance(results['ann_info']['seg_map'],list):
+            seg_img = np.zeros((results['img_shape'][1],results['img_shape'][1]))
+            pass
+        elif results.get('seg_prefix', None) is not None:
+        '''
         if results.get('seg_prefix', None) is not None:
             filename = osp.join(results['seg_prefix'],
                                 results['ann_info']['seg_map'])
