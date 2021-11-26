@@ -27,7 +27,7 @@ def coco2segs(ann_dir,save_dir):
 
         seg_save_dir = os.path.join(save_dir,img['file_name']+".png")
         #np.save(seg_save_dir, seg_img.astype(np.uint8))
-        seg_img_u8 = seg_img.astype(np.uint8)
+        seg_img_u8 = seg_img.astype(np.uint8)*64
         Image.fromarray(seg_img_u8).save(seg_save_dir, 'PNG')
 
 coco2segs("data/td/annotations/train_AW.json","data/td/annotations/segs/")
