@@ -39,7 +39,7 @@ img_scale = (960, 540)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
-    dict(type='Resize', img_scale=img_scale, ratio_range=(0.5, 2.0)),
+    dict(type='Resize', img_scale=img_scale, ratio_range=(1, 1)),
     #dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
