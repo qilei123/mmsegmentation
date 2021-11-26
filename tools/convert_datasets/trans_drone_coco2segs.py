@@ -26,7 +26,7 @@ def coco2segs(ann_dir,save_dir):
             seg_img = np.maximum(seg_img,coco.annToMask(ann)*ann['category_id'])
 
         seg_save_dir = os.path.join(save_dir,img['file_name']+".png")
-        np.save(seg_save_dir, seg_img)
+        np.save(seg_save_dir, seg_img.astype(np.uint8))
         #Image.fromarray(seg_img).astype(np.uint8).save(seg_save_dir, 'PNG')
 
 coco2segs("data/td/annotations/train_AW.json","data/td/annotations/segs/")
