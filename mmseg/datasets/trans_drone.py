@@ -58,12 +58,12 @@ class TDDataset(CustomDataset):
             
             ann_ids = self.coco.getAnnIds(imgIds=[i])
             
-            if len(ann_ids)==0:
-                continue
+            #if len(ann_ids)==0:
+            #    continue
             
-            anns = self.coco.loadAnns(ann_ids)
+            #anns = self.coco.loadAnns(ann_ids)
             
-            info['ann'] = dict(seg_map=anns)
+            info['ann'] = dict(seg_map=info['filename']+seg_map_suffix)
             
             img_infos.append(info)
 

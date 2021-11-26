@@ -76,7 +76,7 @@ data = dict(
         type=dataset_type,
         data_root=data_root,
         img_dir='images',
-        ann_dir='annotations/train_AW.json',
+        ann_dir='annotations/segs',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', reduce_zero_label=True),
@@ -97,7 +97,7 @@ data = dict(
         type=dataset_type,
         data_root=data_root,
         img_dir='images',
-        ann_dir='annotations/test_AW.json',
+        ann_dir='annotations/segs',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -120,7 +120,7 @@ data = dict(
         type=dataset_type,
         data_root=data_root,
         img_dir='images',
-        ann_dir='annotations/test_AW.json',
+        ann_dir='annotations/segs',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
