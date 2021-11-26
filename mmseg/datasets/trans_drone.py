@@ -44,7 +44,10 @@ class TDDataset(CustomDataset):
         self.coco = COCO(ann_dir)
         # The order of returned `cat_ids` will not
         # change with the order of the CLASSES
-        
+        if "train_AW.json" in ann_dir:
+            self.ann_dir = ann_dir.replace("train_AW.json","segs")
+        if "test_AW.json" in ann_dir:
+            self.ann_dir = ann_dir.replace("test_AW.json","segs")            
         self.cat_ids = self.coco.getCatIds(catNms=self.CLASSES)
         self.cat2label = {cat_id: i for i, cat_id in enumerate(self.cat_ids)}
         self.img_ids = self.coco.getImgIds()
