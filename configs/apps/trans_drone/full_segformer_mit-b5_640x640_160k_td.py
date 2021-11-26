@@ -3,7 +3,7 @@ from PIL.Image import TRANSPOSE
 
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 num_classes = 3
-dataset_type = 'TDDataset3'
+dataset_type = 'TDDataset'
 data_root = 'data/td/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
