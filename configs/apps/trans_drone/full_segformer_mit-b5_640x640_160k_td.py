@@ -7,10 +7,11 @@ dataset_type = 'TDDataset4'
 data_root = 'data/td/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-crop_size = (640, 640)
+#crop_size = (640, 640)
 #img_scale = (2048, 640)
-img_scale = (960, 540)
-keep_ratio = True
+#img_scale = (960, 540)
+img_scale = (640, 640)
+keep_ratio = False
 model = dict(
     type='EncoderDecoder',
     pretrained='pretrain/mit_b5.pth',
@@ -78,8 +79,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=1,
-    workers_per_gpu=1,
+    samples_per_gpu=2,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         data_root=data_root,
@@ -128,4 +129,4 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=64000)
 checkpoint_config = dict(by_epoch=False, interval=6400)
 evaluation = dict(interval=6400, metric='mIoU', pre_eval=True)
-work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_bg/'
+work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_bg_640/'
