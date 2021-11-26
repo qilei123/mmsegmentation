@@ -1,3 +1,6 @@
+from PIL.Image import TRANSPOSE
+
+
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 num_classes = 4
 dataset_type = 'TDDataset4'
@@ -7,6 +10,7 @@ img_norm_cfg = dict(
 crop_size = (640, 640)
 #img_scale = (2048, 640)
 img_scale = (960, 540)
+keep_ratio = True
 model = dict(
     type='EncoderDecoder',
     pretrained='pretrain/mit_b5.pth',
@@ -42,7 +46,7 @@ model = dict(
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
-    dict(type='Resize', img_scale=img_scale, keep_ratio=True),
+    dict(type='Resize', img_scale=img_scale, keep_ratio=keep_ratio),
     #dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
@@ -62,7 +66,7 @@ test_pipeline = [
         img_scale=img_scale,
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='Resize', keep_ratio=keep_ratio),
             dict(type='RandomFlip'),
             dict(
                 type='Normalize',
@@ -104,7 +108,7 @@ workflow = [('train', 1)]
 cudnn_benchmark = True
 optimizer = dict(
     type='AdamW',
-    lr=6e-05,
+    lr=6e-06,
     betas=(0.9, 0.999),
     weight_decay=0.01,
     paramwise_cfg=dict(
