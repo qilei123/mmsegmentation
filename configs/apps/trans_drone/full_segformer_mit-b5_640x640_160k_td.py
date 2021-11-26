@@ -2,8 +2,8 @@ from PIL.Image import TRANSPOSE
 
 
 norm_cfg = dict(type='SyncBN', requires_grad=True)
-num_classes = 4
-dataset_type = 'TDDataset4'
+num_classes = 3
+dataset_type = 'TDDataset'
 data_root = 'data/td/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -129,4 +129,4 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=10000)
 checkpoint_config = dict(by_epoch=False, interval=1000)
 evaluation = dict(interval=1000, metric='mIoU', pre_eval=True)
-work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_bg_640/'
+work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_nbg_640/'
