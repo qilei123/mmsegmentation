@@ -14,13 +14,13 @@ class TDDataset(CustomDataset):
         split (str): Split txt file for Pascal VOC.
     """
 
-    CLASSES = ('background', 'Small 1-piece vehicle', 'Large 1-piece vehicle', 'Extra-large 2-piece truck')
+    CLASSES = ('Small 1-piece vehicle', 'Large 1-piece vehicle', 'Extra-large 2-piece truck')
 
-    PALETTE = [[0, 0, 0], [128, 0, 0], [0, 128, 0], [128, 128, 0]]
+    PALETTE = [[128, 0, 0], [0, 128, 0], [128, 128, 0]]
 
     def __init__(self, **kwargs):
         super(TDDataset, self).__init__(
-            img_suffix='.jpg', seg_map_suffix='.png', **kwargs)
+            img_suffix='.jpg', seg_map_suffix='.png',reduce_zero_label=True, **kwargs)
         assert osp.exists(self.img_dir) #and self.split is not None
 
     def load_annotations(self, img_dir, img_suffix, ann_dir, seg_map_suffix,
