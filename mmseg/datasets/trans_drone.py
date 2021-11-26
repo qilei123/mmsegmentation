@@ -91,7 +91,7 @@ class TDDataset4(CustomDataset):
     PALETTE = [[0,0,0],[128, 0, 0], [0, 128, 0], [0, 0, 128]]
 
     def __init__(self, **kwargs):
-        super(TDDataset, self).__init__(
+        super(TDDataset4, self).__init__(
             img_suffix='.jpg', seg_map_suffix='.png', **kwargs)
         assert osp.exists(self.img_dir) #and self.split is not None
 
