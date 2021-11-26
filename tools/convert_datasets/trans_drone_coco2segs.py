@@ -31,5 +31,6 @@ def coco2segs(ann_dir,save_dir):
         Image.fromarray(seg_img_u8).save(seg_save_dir, 'PNG')
 
 coco2segs("data/td/annotations/train_AW.json","data/td/annotations/segs/")
+coco2segs("data/td/annotations/test_AW.json","data/td/annotations/segs/")
 
     
