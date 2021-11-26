@@ -53,6 +53,7 @@ train_pipeline = [
 ]
 test_pipeline = [
     dict(type='LoadImageFromFile'),
+    dict(type='RandomCrop', crop_size=(640, 640)),
     dict(
         type='MultiScaleFlipAug',
         img_scale=(2048, 640),
@@ -77,68 +78,19 @@ data = dict(
         data_root=data_root,
         img_dir='images',
         ann_dir='annotations/train_AW.json',
-        pipeline=[
-            dict(type='LoadImageFromFile'),
-            dict(type='LoadAnnotations', reduce_zero_label=True),
-            dict(type='Resize', img_scale=(2048, 640), ratio_range=(0.5, 2.0)),
-            dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
-            dict(type='RandomFlip', prob=0.5),
-            dict(type='PhotoMetricDistortion'),
-            dict(
-                type='Normalize',
-                mean=[123.675, 116.28, 103.53],
-                std=[58.395, 57.12, 57.375],
-                to_rgb=True),
-            dict(type='Pad', size=(640, 640), pad_val=0, seg_pad_val=255),
-            dict(type='DefaultFormatBundle'),
-            dict(type='Collect', keys=['img', 'gt_semantic_seg'])
-        ]),
+        pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
         data_root=data_root,
         img_dir='images',
         ann_dir='annotations/test_AW.json',
-        pipeline=[
-            dict(type='LoadImageFromFile'),
-            dict(
-                type='MultiScaleFlipAug',
-                img_scale=(2048, 640),
-                flip=False,
-                transforms=[
-                    dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
-                    dict(
-                        type='Normalize',
-                        mean=[123.675, 116.28, 103.53],
-                        std=[58.395, 57.12, 57.375],
-                        to_rgb=True),
-                    dict(type='ImageToTensor', keys=['img']),
-                    dict(type='Collect', keys=['img'])
-                ])
-        ]),
+        pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         data_root=data_root,
         img_dir='images',
         ann_dir='annotations/test_AW.json',
-        pipeline=[
-            dict(type='LoadImageFromFile'),
-            dict(
-                type='MultiScaleFlipAug',
-                img_scale=(2048, 640),
-                flip=False,
-                transforms=[
-                    dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
-                    dict(
-                        type='Normalize',
-                        mean=[123.675, 116.28, 103.53],
-                        std=[58.395, 57.12, 57.375],
-                        to_rgb=True),
-                    dict(type='ImageToTensor', keys=['img']),
-                    dict(type='Collect', keys=['img'])
-                ])
-        ]))
+        pipeline=test_pipeline))
 log_config = dict(
     interval=50, hooks=[dict(type='TextLoggerHook', by_epoch=False)])
 dist_params = dict(backend='nccl')
