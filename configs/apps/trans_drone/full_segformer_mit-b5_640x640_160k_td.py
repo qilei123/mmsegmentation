@@ -1,4 +1,12 @@
 norm_cfg = dict(type='SyncBN', requires_grad=True)
+num_classes = 3
+dataset_type = 'TDDataset'
+data_root = 'data/td/'
+img_norm_cfg = dict(
+    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+crop_size = (640, 640)
+#img_scale = (2048, 640)
+img_scale = (1920, 1080)
 model = dict(
     type='EncoderDecoder',
     pretrained='pretrain/mit_b5.pth',
@@ -23,24 +31,18 @@ model = dict(
         in_index=[0, 1, 2, 3],
         channels=256,
         dropout_ratio=0.1,
-        num_classes=3,
+        num_classes=num_classes,
         norm_cfg=dict(type='SyncBN', requires_grad=True),
         align_corners=False,
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
-dataset_type = 'TDDataset'
-data_root = 'data/td/'
-img_norm_cfg = dict(
-    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-crop_size = (640, 640)
-#img_scale = (2048, 640)
-img_scale = (960, 540)
+
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', reduce_zero_label=True),
-    dict(type='Resize', img_scale=img_scale, ratio_range=(1, 1)),
+    dict(type='LoadAnnotations'),
+    dict(type='Resize', img_scale=img_scale, keep_ratio=True),
     #dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),

@@ -114,13 +114,19 @@ def voc_palette():
 def td_classes():
     return ['Small 1-piece vehicle', 'Large 1-piece vehicle', 'Extra-large 2-piece truck']
 def td_palette():
-    return [[128, 0, 0], [0, 128, 0], [128, 128, 0]]
+    return [[128, 0, 0], [0, 128, 0], [0, 0, 128]]
+
+def td4_classes():
+    return ['background','Small 1-piece vehicle', 'Large 1-piece vehicle', 'Extra-large 2-piece truck']
+def td4_palette():
+    return [[0, 0, 0],[128, 0, 0], [0, 128, 0], [0, 0, 128]]
 
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
     'ade': ['ade', 'ade20k'],
     'voc': ['voc', 'pascal_voc', 'voc12', 'voc12aug'],
-    'td' :['td']
+    'td' :['td'],
+    'td4' :['td4']
 }
 
 
