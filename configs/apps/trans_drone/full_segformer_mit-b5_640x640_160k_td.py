@@ -9,9 +9,9 @@ img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 #crop_size = (640, 640)
 #img_scale = (2048, 640)
-img_scale = (960, 540)
-#img_scale = (640, 640)
-keep_ratio = True
+#img_scale = (960, 540)
+img_scale = (640, 640)
+keep_ratio = False
 model = dict(
     type='EncoderDecoder',
     pretrained='pretrain/mit_b5.pth',
@@ -129,4 +129,4 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=10000)
 checkpoint_config = dict(by_epoch=False, interval=1000)
 evaluation = dict(interval=1000, metric='mIoU', pre_eval=True)
-work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_nbg_960/'
+work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_nbg_640/'
