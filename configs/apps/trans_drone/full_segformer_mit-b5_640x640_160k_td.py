@@ -39,7 +39,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='Resize', img_scale=(2048, 640), ratio_range=(0.5, 2.0)),
-    dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
+    #dict(type='RandomCrop', crop_size=(640, 640), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
     dict(
@@ -53,7 +53,6 @@ train_pipeline = [
 ]
 test_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='RandomCrop', crop_size=(640, 640)),
     dict(
         type='MultiScaleFlipAug',
         img_scale=(2048, 640),
@@ -121,4 +120,4 @@ lr_config = dict(
 runner = dict(type='IterBasedRunner', max_iters=64000)
 checkpoint_config = dict(by_epoch=False, interval=6400)
 evaluation = dict(interval=6400, metric='mIoU', pre_eval=True)
-work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td/'
+work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_160k_td_norc/'
