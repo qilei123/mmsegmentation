@@ -126,7 +126,7 @@ lr_config = dict(
     power=1.0,
     min_lr=0.0,
     by_epoch=False)
-runner = dict(type='IterBasedRunner', max_iters=40000)
-checkpoint_config = dict(by_epoch=False, interval=4000)
-evaluation = dict(interval=4000, metric='mIoU', pre_eval=True)
+runner = dict(type='IterBasedRunner', max_iters=320000)
+checkpoint_config = dict(by_epoch=False, interval=40000)
+evaluation = dict(interval=40000, metric='mIoU', pre_eval=True)
 work_dir = data_root+'work_dirs/full_segformer_mit-b5_640x640_td_nbg_960/'
